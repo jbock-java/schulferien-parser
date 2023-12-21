@@ -10,7 +10,7 @@ public class Main {
         StaXParser read = new StaXParser();
         List<Datum> result = read.readConfig("data/schulferien_2024.xml");
         for (Datum datum : result) {
-            System.out.println(datum);
+            System.out.println(datum.getDate());
         }
     }
 }
