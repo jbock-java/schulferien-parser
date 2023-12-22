@@ -6,9 +6,9 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,12 +19,12 @@ public class StaXParser {
     private static final String TD = "td";
     private static final String TH = "th";
 
-    public List<Datum> readConfig(String configFile) throws XMLStreamException, FileNotFoundException {
+    public List<Datum> parse(String configFile) throws XMLStreamException {
         List<Datum> result = new ArrayList<>();
         // First, create a new XMLInputFactory
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         // Setup a new eventReader
-        InputStream in = new FileInputStream(configFile);
+        InputStream in = new ByteArrayInputStream(configFile.getBytes(StandardCharsets.UTF_8));
         XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
         // read the XML document
         String month = "";

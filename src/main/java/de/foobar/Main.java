@@ -1,7 +1,9 @@
 package de.foobar;
 
 import javax.xml.stream.XMLStreamException;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +13,9 @@ public class Main {
     record DateRange(LocalDate von, LocalDate bis) {
     }
 
-    public static void main(String[] args) throws XMLStreamException, FileNotFoundException {
-        StaXParser read = new StaXParser();
-        List<Datum> result = read.readConfig("data/schulferien_2024.xml");
+    public static void main(String[] args) throws XMLStreamException, IOException {
+        StaXParser parser = new StaXParser();
+        List<Datum> result = parser.parse(Clean.readClean(Files.readAllLines(Paths.get("data/ni_2025.xml"))));
         LocalDate groupStart = null;
         LocalDate prev = null;
         List<DateRange> ranges = new ArrayList<>();
