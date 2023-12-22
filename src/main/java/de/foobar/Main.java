@@ -30,7 +30,7 @@ public class Main {
         }
         ranges.add(new DateRange(groupStart, prev));
         for (DateRange range : ranges) {
-            System.out.println(range.von + "_" + range.bis);
+            System.out.println("'" + range.von + "_" + range.bis + "',");
         }
     }
 }
